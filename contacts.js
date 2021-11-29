@@ -33,6 +33,11 @@ await fs.writeFile(contactsPath, JSON.stringify(contacts));
 const addContact = async(name, email, phone) => {
   const contacts = await listContacts();
   const newContact = { name, email, phone, id: v4() };
+
+if (!name || !email || !phone) {
+  return `All fields are required!`
+}
+
   contacts.push(newContact);
   await fs.writeFile(contactsPath, JSON.stringify(contacts));
   return newContact;
